@@ -30,6 +30,12 @@ class Ws {
      */
     public function onOpen($ws,$request){
         var_dump($request->fd);
+        if($request->fd == 1){
+            // 触发毫秒级定时器 每2秒执行
+            swoole_timer_tick(2000,function($timer_id){
+                echo "毫秒级定时器,timerid: {$timer_id}";
+            });
+        }
     }
 
     /**
@@ -48,7 +54,13 @@ class Ws {
             'task' => 1,
             'fd' => $frame->fd
         ];
-        $this->ws->task($data);
+//        $this->ws->task($data);
+        // 触发定时器 5秒后执行
+        swoole_timer_after(5000,function() use($ws,$frame){
+            echo "5 秒-after\n";
+            $this->ws->push($frame->fd,'server-timer-after');
+        });
+
         $this->ws->push($frame->fd,"server push:".date('Y-m-d H:i:s',time()));
 
     }
