@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Swoole-WebSocket</title>
+</head>
+<body>
+<script>
+    var wsUrl = "ws://192.168.2.103:9504";
+    var websocket = new WebSocket(wsUrl);
+    // 实例对象的onopen属性
+    websocket.onopen = function(evt){
+        websocket.send("hello assasin-shibin")
+        console.log("connect swoole success");
+    }
+    // 实例化对象onMessage
+    websocket.onmessage = function(evt){
+        // 接收服务端消息
+        console.log("ws-swoole-return-data" + evt.data );
+    }
+    // 实例化onclose事件
+    websocket.onclose = function(evt){
+        console.log("websocket closed");
+    }
+    websocket.onerror = function(evt,e){
+        console.log("error:" + evt.data)
+    }
+</script>
+</body>
+</html>
