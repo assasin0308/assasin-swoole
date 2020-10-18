@@ -2,6 +2,7 @@
 
 Co\run(function () {
     $redis = new Swoole\Coroutine\Redis();
-    $redis->connect('192.168.2.103', 6379);
+    $redis->connect('127.0.0.1', 6379);
     $val = $redis->get('key');
+    echo $val;
 });
