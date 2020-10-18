@@ -6,7 +6,6 @@ tar -xjvf php-7.2.2.tar.bz2
 cd php-7.2.2
 ./configure --prefix=/usr/local/php 
 make && make install
-
 ```
 
 
