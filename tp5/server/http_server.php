@@ -17,6 +17,7 @@ $http->on('WorkerStart',function(Swoole\Http\Server $server) {
 });
 $http->on('request',function($request,$response) use($http){
 //    $response->header("Content-Type","text/plain"); // header头设置
+    $_SERVER = [];
     if(isset($request->server)){
         foreach($request->server as $k => $v){
             $_SERVER[strtoupper($k)] = $v;
@@ -27,17 +28,14 @@ $http->on('request',function($request,$response) use($http){
             $_SERVER[strtoupper($k)] = $v;
         }
     }
-    if(!empty($_GET)){
-        unset($_GET);
-    }
+
+    $_GET = [];
     if(isset($request->get)){
         foreach($request->get as $k => $v){
             $_GET[strtoupper($k)] = $v;
         }
     }
-    if(!empty($_POST)){
-        unset($_POST);
-    }
+    $_POST = [];
     if(isset($request->post)){
         foreach($request->post as $k => $v){
             $_POST[strtoupper($k)] = $v;
